@@ -8,16 +8,13 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "C:/Code_Territory/C_Code/Calculation_and_Derivation_lab/tests/test_evaluator.cpp" "CMakeFiles/unit_tests.dir/tests/test_evaluator.cpp.obj" "gcc" "CMakeFiles/unit_tests.dir/tests/test_evaluator.cpp.obj.d"
-  "C:/Code_Territory/C_Code/Calculation_and_Derivation_lab/tests/test_main.cpp" "CMakeFiles/unit_tests.dir/tests/test_main.cpp.obj" "gcc" "CMakeFiles/unit_tests.dir/tests/test_main.cpp.obj.d"
+  "/workspace/tests/test_evaluator.cpp" "CMakeFiles/unit_tests.dir/tests/test_evaluator.cpp.o" "gcc" "CMakeFiles/unit_tests.dir/tests/test_evaluator.cpp.o.d"
+  "/workspace/tests/test_main.cpp" "CMakeFiles/unit_tests.dir/tests/test_main.cpp.o" "gcc" "CMakeFiles/unit_tests.dir/tests/test_main.cpp.o.d"
   )
 
-# Targets to which this target links which contain Fortran sources.
-set(CMAKE_Fortran_TARGET_LINKED_INFO_FILES
-  )
-
-# Targets to which this target links which contain Fortran sources.
-set(CMAKE_Fortran_TARGET_FORWARD_LINKED_INFO_FILES
+# Targets to which this target links.
+set(CMAKE_TARGET_LINKED_INFO_FILES
+  "/workspace/build/CMakeFiles/calc_lib.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

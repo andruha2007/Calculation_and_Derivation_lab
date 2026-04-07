@@ -1,41 +1,77 @@
-# Prerequisites
-*.d
+```
+# Build system
+build/
+cmake-build*/
 
-# Compiled Object files
-*.slo
-*.lo
+# CMake specific
+CMakeCache.txt
+CMakeFiles/
+CMakeScripts/
+
+# Dependencies downloaded by CMake
+_deps/
+
+# Compiler artifacts
 *.o
 *.obj
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Linker files
-*.ilk
-
-# Debugger Files
-*.pdb
-
-# Compiled Dynamic libraries
+*.a
+*.lib
 *.so
 *.dylib
 *.dll
 
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
 # Executables
 *.exe
 *.out
-*.app
 
-# debug information files
-*.dwo
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*~
+
+# Coverage reports
+coverage/
+htmlcov/
+
+# Environment files
+.env
+.env.local
+*.env.*
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# MyPy cache
+.mypy_cache/
+
+# Pytest cache
+.pytest_cache/
+
+# Distribution artifacts
+dist/
+*.egg-info/
+
+# Gradle
+.gradle/
+build/
+
+# Target directory for Rust/Cargo
+target/
+
+# Julia packages
+.julia/
+
+# Zig cache
+zig-cache/
+```

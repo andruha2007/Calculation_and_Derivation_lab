@@ -1,11 +1,9 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/unit_tests.dir/tests/test_evaluator.cpp.obj"
-  "CMakeFiles/unit_tests.dir/tests/test_evaluator.cpp.obj.d"
-  "CMakeFiles/unit_tests.dir/tests/test_main.cpp.obj"
-  "CMakeFiles/unit_tests.dir/tests/test_main.cpp.obj.d"
-  "libunit_tests.dll.a"
-  "unit_tests.exe"
-  "unit_tests.exe.manifest"
+  "CMakeFiles/unit_tests.dir/tests/test_evaluator.cpp.o"
+  "CMakeFiles/unit_tests.dir/tests/test_evaluator.cpp.o.d"
+  "CMakeFiles/unit_tests.dir/tests/test_main.cpp.o"
+  "CMakeFiles/unit_tests.dir/tests/test_main.cpp.o.d"
+  "unit_tests"
   "unit_tests.pdb"
 )
 

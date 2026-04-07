@@ -70,18 +70,17 @@ Token Lexer::next(){
 
     Token tok;
     
-    if(peek_char() == ' ' && position == 0){
-        throw std::runtime_error("ERROR [Lexer] Spaces are not available at the beginning");
-    } if (peek_type() == lexem_t::EOEX){
+    if (peek_type() == lexem_t::EOEX){
         tok.set_type(lexem_t::EOEX);
         return tok;
     }
 
-    while (peek_char() == ' '){
-        advance();
+    if (peek_char() == ' '){ // Пробелы в начале выражения запрещены
+        throw std::runtime_error("ERROR [Lexer] Spaces are not available at the beginning");
     }
 
     lexem_t lex = peek_type();
+    if (peek_type() == lexem_t::EOEX){ tok.set_type(lexem_t::EOEX); return tok; }
     char c = peek_char();
 
     switch (lex)
@@ -130,6 +129,7 @@ Token Lexer::scan_indentificator(){
         switch (state){
         case lexer_state_t::START:
             if (std::isalpha(c) || c == '_'){
+                buffer += c; // Добавляем символ в буфер перед advance()
                 advance();
                 state = lexer_state_t::ID_CHAR;
             } else{
@@ -138,6 +138,7 @@ Token Lexer::scan_indentificator(){
             break;
         case lexer_state_t::ID_CHAR:
             if(std::isdigit(c) || std::isalpha(c) || c =='_'){
+                buffer += c; // Добавляем символ в буфер перед advance()
                 advance();
                 state = lexer_state_t::ID_CHAR;
             } else{
@@ -148,7 +149,6 @@ Token Lexer::scan_indentificator(){
             break;
         }
 
-        buffer += c;
     }
 
     ++tok_pos;
@@ -233,10 +233,10 @@ Token Lexer::scan_number(){
                 }
                 break;
             case lexer_state_t::NUM_EXP:
-                if (std::isdigit(c) && c >= '1' && c <= '9'){
+                if (std::isdigit(c) && c >= '0' && c <= '9'){
                     advance();
                     state = lexer_state_t::NUM_AFTER_EXP;
-                }if (c == '+' || c == '-'){
+                } else if (c == '+' || c == '-'){
                     advance();
                     state = lexer_state_t::NUM_SIGN_EXP;
                 } else{

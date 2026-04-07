@@ -1,7 +1,0 @@
-{
-	"InstallScripts" : 
-	[
-		"C:/Code_Territory/C_Code/Calculation_and_Derivation_lab/build/_deps/catch2-subbuild/cmake_install.cmake"
-	],
-	"Parallel" : false
-}

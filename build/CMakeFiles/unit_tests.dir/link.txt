@@ -1,3 +1,1 @@
-"C:\Program Files\CMake\bin\cmake.exe" -E rm -f CMakeFiles\unit_tests.dir/objects.a
-C:\mingw64\bin\ar.exe qc CMakeFiles\unit_tests.dir/objects.a @CMakeFiles\unit_tests.dir\objects1.rsp
-C:\mingw64\bin\c++.exe -Wl,--whole-archive CMakeFiles\unit_tests.dir/objects.a -Wl,--no-whole-archive -o unit_tests.exe -Wl,--out-implib,libunit_tests.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\unit_tests.dir\linkLibs.rsp
+/usr/bin/c++ CMakeFiles/unit_tests.dir/tests/test_main.cpp.o CMakeFiles/unit_tests.dir/tests/test_evaluator.cpp.o -o unit_tests  libcalc_lib.a 

@@ -87,9 +87,9 @@ AST Parser::parse(){
             throw std::runtime_error("ERROR [Parser] String can not start from " + current.get_value());
         } // Строка начинается с операции, не являющейся + или -
         if (current.get_type() == next.get_type() && next.get_value() != "-"
-            && next.get_value() != "+"){
+            && next.get_value() != "+" && current.get_type() != lexem_t::L_CIRCLE_PAPAREN){
             throw std::runtime_error("ERROR [Parser] " + current.get_value());
-        } // 2 операции (не + -), числа, идентификатора подряд
+        } // 2 операции (не + -), числа, идентификатора подряд (но не скобки)
         if (!is_in_function && current.get_value() == ","){
             throw std::runtime_error("ERROR [Parser] Unexpected ,");
         }
@@ -200,7 +200,7 @@ AST Parser::parse(){
         else if (current.get_type() == lexem_t::R_CIRCLE_PAPAREN){
             if (first_call)
                 throw(std::runtime_error("ERROR [Parser] Unexpected symbol )"));
-            if (stack_op.back().get_symbol() == OpSign::L_PAREN && !is_in_function)
+            if (!stack_op.empty() && stack_op.back().get_symbol() == OpSign::L_PAREN && !is_in_function)
                 throw(std::runtime_error("ERROR [Parser] ()"));
             while(!stack_op.empty() && stack_op.back().get_symbol() != OpSign::L_PAREN){
                 if (stack_op.back().get_priority() == 3){
@@ -231,30 +231,34 @@ AST Parser::parse(){
                 stack_op.pop_back();
             }
             if (is_in_function){
-                if (!tree_stack.empty()) {
-                    stack_of_args.push_back(std::move(tree_stack.back()));
-                    tree_stack.pop_back();
-                }
-                
-                std::string func_name = stack_op.back().get_function();
-                int expected = get_expected_arg_count(func_name);
-                int actual = static_cast<int>(stack_of_args.size());
-                
-                if (expected == -2) {
-                    throw std::runtime_error("ERROR [Parser] Unknown function: " + func_name);
-                } else if (expected == -1) {
-                    if (actual < 1) {
-                        throw std::runtime_error("ERROR [Parser] Function '" + func_name + "' requires at least 1 argument, got " + std::to_string(actual));
+                // Проверяем, является ли текущий оператор функцией
+                if (!stack_op.empty() && stack_op.back().is_func()){
+                    if (!tree_stack.empty()) {
+                        stack_of_args.push_back(std::move(tree_stack.back()));
+                        tree_stack.pop_back();
                     }
-                } else if (actual != expected) {
-                    throw std::runtime_error("ERROR [Parser] Function '" + func_name + "' expects " + 
-                                           std::to_string(expected) + " argument(s), got " + std::to_string(actual));
+                    
+                    std::string func_name = stack_op.back().get_function();
+                    int expected = get_expected_arg_count(func_name);
+                    int actual = static_cast<int>(stack_of_args.size());
+                    
+                    if (expected == -2) {
+                        throw std::runtime_error("ERROR [Parser] Unknown function: " + func_name);
+                    } else if (expected == -1) {
+                        if (actual < 1) {
+                            throw std::runtime_error("ERROR [Parser] Function '" + func_name + "' requires at least 1 argument, got " + std::to_string(actual));
+                        }
+                    } else if (actual != expected) {
+                        throw std::runtime_error("ERROR [Parser] Function '" + func_name + "' expects " + 
+                                               std::to_string(expected) + " argument(s), got " + std::to_string(actual));
+                    }
+                    
+                    tree_stack.push_back(std::make_unique<FunctionCallNode>(func_name, std::move(stack_of_args)));
+                    is_in_function = false;
+                    stack_op.pop_back();
+                    stack_of_args.clear();
                 }
-                
-                tree_stack.push_back(std::make_unique<FunctionCallNode>(func_name, std::move(stack_of_args)));
-                is_in_function = false;
-                stack_op.pop_back();
-                stack_of_args.clear();
+                // Если это не функция, просто закрываем скобку и продолжаем
             }
         } // Правая скобка
 
