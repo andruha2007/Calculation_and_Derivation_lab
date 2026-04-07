@@ -1,3 +1,0 @@
-C:/Code_Territory/C_Code/Calculation_and_Derivation_lab/build/_deps/catch2-subbuild/CMakeFiles/catch2-populate.dir
-C:/Code_Territory/C_Code/Calculation_and_Derivation_lab/build/_deps/catch2-subbuild/CMakeFiles/edit_cache.dir
-C:/Code_Territory/C_Code/Calculation_and_Derivation_lab/build/_deps/catch2-subbuild/CMakeFiles/rebuild_cache.dir

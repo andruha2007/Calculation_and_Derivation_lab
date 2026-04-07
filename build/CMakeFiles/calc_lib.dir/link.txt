@@ -1,2 +1,2 @@
-C:\mingw64\bin\ar.exe qc libcalc_lib.a CMakeFiles/calc_lib.dir/src/lexer.cpp.obj CMakeFiles/calc_lib.dir/src/parser.cpp.obj CMakeFiles/calc_lib.dir/src/visitor.cpp.obj
-C:\mingw64\bin\ranlib.exe libcalc_lib.a
+/usr/bin/ar qc libcalc_lib.a CMakeFiles/calc_lib.dir/src/lexer.cpp.o CMakeFiles/calc_lib.dir/src/parser.cpp.o CMakeFiles/calc_lib.dir/src/visitor.cpp.o
+/usr/bin/ranlib libcalc_lib.a
