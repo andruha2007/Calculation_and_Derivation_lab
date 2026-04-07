@@ -39,8 +39,7 @@ int main(int argc, char** argv) {
         std::getline(std::cin, expression);
         
         std::cout << "__________________________LEXER'S_PART__________________________\n";
-        Lexer lex_test(expression);
-        lexer_flow_concatenator(expression);
+        std::cout << lexer_flow_concatenator(expression);
         
         std::cout << "__________________________PARSER'S_PART__________________________\n";
         
@@ -50,17 +49,33 @@ int main(int argc, char** argv) {
         
         std::cout << print_ast(tree.get_root()) << "\n";
         
-        std::cout << "__________________________EVALUATOR'S_PART__________________________\n";
         
+        std::string differentiation_variable = (argc >= 3) ? argv[2] : "x";
+
         if (std::string(argv[1]) == "evaluate"){
+            std::cout << "__________________________EVALUATOR'S_PART__________________________\n";
             Evaluator evaluator(variables);
             tree.get_root()->accept(evaluator);
             std::cout << "Result: " << evaluator.get_result() << "\n";
             return 0;
         } else if (std::string(argv[1]) == "deriviative"){
-
+            std::cout << "__________________________DERIVATIVE'S_PART__________________________\n";
+            Derivative derivative(differentiation_variable);
+            tree.get_root()->accept(derivative);
+            AST derivative_tree = derivative.get_result();
+            std::cout << "Derivative: " << print_ast(derivative_tree.get_root()) << "\n";
+            return 0;
         } else if (std::string(argv[1]) == "evaluate_deriviative"){
-            
+            std::cout << "__________________________DERIVALUATOR'S_PART__________________________\n";
+            Derivative derivative(differentiation_variable);
+            tree.get_root()->accept(derivative);
+            AST derivative_tree = derivative.get_result();
+            std::cout << "Derivative: " << print_ast(derivative_tree.get_root()) << "\n";
+
+            Evaluator evaluator(variables);
+            derivative_tree.get_root()->accept(evaluator);
+            std::cout << "Result: " << evaluator.get_result() << "\n";
+            return 0;
         } else {
             throw std::runtime_error("ERROR [INSERT]: Unknown request. You should use: evaluate, deriviative, evaluate_deriviative");
         }

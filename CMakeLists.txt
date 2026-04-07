@@ -10,12 +10,16 @@ include_directories(include external)
 file(GLOB_RECURSE LIB_SOURCES
     "src/lexer.cpp"
     "src/parser.cpp"
-    "src/visitor.cpp"
+    "src/evaluator_visitor.cpp"
+    "src/derivative_visitor.cpp"
 )
 list(FILTER LIB_SOURCES EXCLUDE REGEX "src/main.cpp")
 
 add_library(calc_lib STATIC ${LIB_SOURCES})
 target_include_directories(calc_lib PUBLIC include)
+
+add_executable(calculator_lab main.cpp)
+target_link_libraries(calculator_lab PRIVATE calc_lib)
 
 enable_testing()
 
@@ -23,6 +27,8 @@ enable_testing()
 set(TEST_SOURCES
     tests/test_main.cpp
     tests/test_evaluator.cpp
+    tests/test_evaluate_derivative.cpp
+    tests/test_derivative.cpp
     # добавьте остальные ваши тестовые файлы
 )
 

@@ -71,11 +71,41 @@ include CMakeFiles/calc_lib.dir/flags.make
 CMakeFiles/calc_lib.dir/codegen:
 .PHONY : CMakeFiles/calc_lib.dir/codegen
 
+CMakeFiles/calc_lib.dir/src/derivative_visitor.cpp.obj: CMakeFiles/calc_lib.dir/flags.make
+CMakeFiles/calc_lib.dir/src/derivative_visitor.cpp.obj: CMakeFiles/calc_lib.dir/includes_CXX.rsp
+CMakeFiles/calc_lib.dir/src/derivative_visitor.cpp.obj: C:/Code_Territory/C_Code/Calculation_and_Derivation_lab/src/derivative_visitor.cpp
+CMakeFiles/calc_lib.dir/src/derivative_visitor.cpp.obj: CMakeFiles/calc_lib.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Code_Territory\C_Code\Calculation_and_Derivation_lab\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/calc_lib.dir/src/derivative_visitor.cpp.obj"
+	C:\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/calc_lib.dir/src/derivative_visitor.cpp.obj -MF CMakeFiles\calc_lib.dir\src\derivative_visitor.cpp.obj.d -o CMakeFiles\calc_lib.dir\src\derivative_visitor.cpp.obj -c C:\Code_Territory\C_Code\Calculation_and_Derivation_lab\src\derivative_visitor.cpp
+
+CMakeFiles/calc_lib.dir/src/derivative_visitor.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/calc_lib.dir/src/derivative_visitor.cpp.i"
+	C:\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Code_Territory\C_Code\Calculation_and_Derivation_lab\src\derivative_visitor.cpp > CMakeFiles\calc_lib.dir\src\derivative_visitor.cpp.i
+
+CMakeFiles/calc_lib.dir/src/derivative_visitor.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/calc_lib.dir/src/derivative_visitor.cpp.s"
+	C:\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Code_Territory\C_Code\Calculation_and_Derivation_lab\src\derivative_visitor.cpp -o CMakeFiles\calc_lib.dir\src\derivative_visitor.cpp.s
+
+CMakeFiles/calc_lib.dir/src/evaluator_visitor.cpp.obj: CMakeFiles/calc_lib.dir/flags.make
+CMakeFiles/calc_lib.dir/src/evaluator_visitor.cpp.obj: CMakeFiles/calc_lib.dir/includes_CXX.rsp
+CMakeFiles/calc_lib.dir/src/evaluator_visitor.cpp.obj: C:/Code_Territory/C_Code/Calculation_and_Derivation_lab/src/evaluator_visitor.cpp
+CMakeFiles/calc_lib.dir/src/evaluator_visitor.cpp.obj: CMakeFiles/calc_lib.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Code_Territory\C_Code\Calculation_and_Derivation_lab\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/calc_lib.dir/src/evaluator_visitor.cpp.obj"
+	C:\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/calc_lib.dir/src/evaluator_visitor.cpp.obj -MF CMakeFiles\calc_lib.dir\src\evaluator_visitor.cpp.obj.d -o CMakeFiles\calc_lib.dir\src\evaluator_visitor.cpp.obj -c C:\Code_Territory\C_Code\Calculation_and_Derivation_lab\src\evaluator_visitor.cpp
+
+CMakeFiles/calc_lib.dir/src/evaluator_visitor.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/calc_lib.dir/src/evaluator_visitor.cpp.i"
+	C:\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Code_Territory\C_Code\Calculation_and_Derivation_lab\src\evaluator_visitor.cpp > CMakeFiles\calc_lib.dir\src\evaluator_visitor.cpp.i
+
+CMakeFiles/calc_lib.dir/src/evaluator_visitor.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/calc_lib.dir/src/evaluator_visitor.cpp.s"
+	C:\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Code_Territory\C_Code\Calculation_and_Derivation_lab\src\evaluator_visitor.cpp -o CMakeFiles\calc_lib.dir\src\evaluator_visitor.cpp.s
+
 CMakeFiles/calc_lib.dir/src/lexer.cpp.obj: CMakeFiles/calc_lib.dir/flags.make
 CMakeFiles/calc_lib.dir/src/lexer.cpp.obj: CMakeFiles/calc_lib.dir/includes_CXX.rsp
 CMakeFiles/calc_lib.dir/src/lexer.cpp.obj: C:/Code_Territory/C_Code/Calculation_and_Derivation_lab/src/lexer.cpp
 CMakeFiles/calc_lib.dir/src/lexer.cpp.obj: CMakeFiles/calc_lib.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Code_Territory\C_Code\Calculation_and_Derivation_lab\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/calc_lib.dir/src/lexer.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Code_Territory\C_Code\Calculation_and_Derivation_lab\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/calc_lib.dir/src/lexer.cpp.obj"
 	C:\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/calc_lib.dir/src/lexer.cpp.obj -MF CMakeFiles\calc_lib.dir\src\lexer.cpp.obj.d -o CMakeFiles\calc_lib.dir\src\lexer.cpp.obj -c C:\Code_Territory\C_Code\Calculation_and_Derivation_lab\src\lexer.cpp
 
 CMakeFiles/calc_lib.dir/src/lexer.cpp.i: cmake_force
@@ -90,7 +120,7 @@ CMakeFiles/calc_lib.dir/src/parser.cpp.obj: CMakeFiles/calc_lib.dir/flags.make
 CMakeFiles/calc_lib.dir/src/parser.cpp.obj: CMakeFiles/calc_lib.dir/includes_CXX.rsp
 CMakeFiles/calc_lib.dir/src/parser.cpp.obj: C:/Code_Territory/C_Code/Calculation_and_Derivation_lab/src/parser.cpp
 CMakeFiles/calc_lib.dir/src/parser.cpp.obj: CMakeFiles/calc_lib.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Code_Territory\C_Code\Calculation_and_Derivation_lab\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/calc_lib.dir/src/parser.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Code_Territory\C_Code\Calculation_and_Derivation_lab\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/calc_lib.dir/src/parser.cpp.obj"
 	C:\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/calc_lib.dir/src/parser.cpp.obj -MF CMakeFiles\calc_lib.dir\src\parser.cpp.obj.d -o CMakeFiles\calc_lib.dir\src\parser.cpp.obj -c C:\Code_Territory\C_Code\Calculation_and_Derivation_lab\src\parser.cpp
 
 CMakeFiles/calc_lib.dir/src/parser.cpp.i: cmake_force
@@ -101,36 +131,23 @@ CMakeFiles/calc_lib.dir/src/parser.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/calc_lib.dir/src/parser.cpp.s"
 	C:\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Code_Territory\C_Code\Calculation_and_Derivation_lab\src\parser.cpp -o CMakeFiles\calc_lib.dir\src\parser.cpp.s
 
-CMakeFiles/calc_lib.dir/src/visitor.cpp.obj: CMakeFiles/calc_lib.dir/flags.make
-CMakeFiles/calc_lib.dir/src/visitor.cpp.obj: CMakeFiles/calc_lib.dir/includes_CXX.rsp
-CMakeFiles/calc_lib.dir/src/visitor.cpp.obj: C:/Code_Territory/C_Code/Calculation_and_Derivation_lab/src/visitor.cpp
-CMakeFiles/calc_lib.dir/src/visitor.cpp.obj: CMakeFiles/calc_lib.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Code_Territory\C_Code\Calculation_and_Derivation_lab\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/calc_lib.dir/src/visitor.cpp.obj"
-	C:\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/calc_lib.dir/src/visitor.cpp.obj -MF CMakeFiles\calc_lib.dir\src\visitor.cpp.obj.d -o CMakeFiles\calc_lib.dir\src\visitor.cpp.obj -c C:\Code_Territory\C_Code\Calculation_and_Derivation_lab\src\visitor.cpp
-
-CMakeFiles/calc_lib.dir/src/visitor.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/calc_lib.dir/src/visitor.cpp.i"
-	C:\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Code_Territory\C_Code\Calculation_and_Derivation_lab\src\visitor.cpp > CMakeFiles\calc_lib.dir\src\visitor.cpp.i
-
-CMakeFiles/calc_lib.dir/src/visitor.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/calc_lib.dir/src/visitor.cpp.s"
-	C:\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Code_Territory\C_Code\Calculation_and_Derivation_lab\src\visitor.cpp -o CMakeFiles\calc_lib.dir\src\visitor.cpp.s
-
 # Object files for target calc_lib
 calc_lib_OBJECTS = \
+"CMakeFiles/calc_lib.dir/src/derivative_visitor.cpp.obj" \
+"CMakeFiles/calc_lib.dir/src/evaluator_visitor.cpp.obj" \
 "CMakeFiles/calc_lib.dir/src/lexer.cpp.obj" \
-"CMakeFiles/calc_lib.dir/src/parser.cpp.obj" \
-"CMakeFiles/calc_lib.dir/src/visitor.cpp.obj"
+"CMakeFiles/calc_lib.dir/src/parser.cpp.obj"
 
 # External object files for target calc_lib
 calc_lib_EXTERNAL_OBJECTS =
 
+libcalc_lib.a: CMakeFiles/calc_lib.dir/src/derivative_visitor.cpp.obj
+libcalc_lib.a: CMakeFiles/calc_lib.dir/src/evaluator_visitor.cpp.obj
 libcalc_lib.a: CMakeFiles/calc_lib.dir/src/lexer.cpp.obj
 libcalc_lib.a: CMakeFiles/calc_lib.dir/src/parser.cpp.obj
-libcalc_lib.a: CMakeFiles/calc_lib.dir/src/visitor.cpp.obj
 libcalc_lib.a: CMakeFiles/calc_lib.dir/build.make
 libcalc_lib.a: CMakeFiles/calc_lib.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\Code_Territory\C_Code\Calculation_and_Derivation_lab\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX static library libcalc_lib.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\Code_Territory\C_Code\Calculation_and_Derivation_lab\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX static library libcalc_lib.a"
 	$(CMAKE_COMMAND) -P CMakeFiles\calc_lib.dir\cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\calc_lib.dir\link.txt --verbose=$(VERBOSE)
 

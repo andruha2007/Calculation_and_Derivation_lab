@@ -139,6 +139,19 @@ calc_lib/fast:
 .PHONY : calc_lib/fast
 
 #=============================================================================
+# Target rules for targets named calculator_lab
+
+# Build rule for target.
+calculator_lab: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 calculator_lab
+.PHONY : calculator_lab
+
+# fast build rule for target.
+calculator_lab/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\calculator_lab.dir\build.make CMakeFiles/calculator_lab.dir/build
+.PHONY : calculator_lab/fast
+
+#=============================================================================
 # Target rules for targets named unit_tests
 
 # Build rule for target.
@@ -150,6 +163,78 @@ unit_tests: cmake_check_build_system
 unit_tests/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\unit_tests.dir\build.make CMakeFiles/unit_tests.dir/build
 .PHONY : unit_tests/fast
+
+main.obj: main.cpp.obj
+.PHONY : main.obj
+
+# target to build an object file
+main.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\calculator_lab.dir\build.make CMakeFiles/calculator_lab.dir/main.cpp.obj
+.PHONY : main.cpp.obj
+
+main.i: main.cpp.i
+.PHONY : main.i
+
+# target to preprocess a source file
+main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\calculator_lab.dir\build.make CMakeFiles/calculator_lab.dir/main.cpp.i
+.PHONY : main.cpp.i
+
+main.s: main.cpp.s
+.PHONY : main.s
+
+# target to generate assembly for a file
+main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\calculator_lab.dir\build.make CMakeFiles/calculator_lab.dir/main.cpp.s
+.PHONY : main.cpp.s
+
+src/derivative_visitor.obj: src/derivative_visitor.cpp.obj
+.PHONY : src/derivative_visitor.obj
+
+# target to build an object file
+src/derivative_visitor.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\calc_lib.dir\build.make CMakeFiles/calc_lib.dir/src/derivative_visitor.cpp.obj
+.PHONY : src/derivative_visitor.cpp.obj
+
+src/derivative_visitor.i: src/derivative_visitor.cpp.i
+.PHONY : src/derivative_visitor.i
+
+# target to preprocess a source file
+src/derivative_visitor.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\calc_lib.dir\build.make CMakeFiles/calc_lib.dir/src/derivative_visitor.cpp.i
+.PHONY : src/derivative_visitor.cpp.i
+
+src/derivative_visitor.s: src/derivative_visitor.cpp.s
+.PHONY : src/derivative_visitor.s
+
+# target to generate assembly for a file
+src/derivative_visitor.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\calc_lib.dir\build.make CMakeFiles/calc_lib.dir/src/derivative_visitor.cpp.s
+.PHONY : src/derivative_visitor.cpp.s
+
+src/evaluator_visitor.obj: src/evaluator_visitor.cpp.obj
+.PHONY : src/evaluator_visitor.obj
+
+# target to build an object file
+src/evaluator_visitor.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\calc_lib.dir\build.make CMakeFiles/calc_lib.dir/src/evaluator_visitor.cpp.obj
+.PHONY : src/evaluator_visitor.cpp.obj
+
+src/evaluator_visitor.i: src/evaluator_visitor.cpp.i
+.PHONY : src/evaluator_visitor.i
+
+# target to preprocess a source file
+src/evaluator_visitor.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\calc_lib.dir\build.make CMakeFiles/calc_lib.dir/src/evaluator_visitor.cpp.i
+.PHONY : src/evaluator_visitor.cpp.i
+
+src/evaluator_visitor.s: src/evaluator_visitor.cpp.s
+.PHONY : src/evaluator_visitor.s
+
+# target to generate assembly for a file
+src/evaluator_visitor.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\calc_lib.dir\build.make CMakeFiles/calc_lib.dir/src/evaluator_visitor.cpp.s
+.PHONY : src/evaluator_visitor.cpp.s
 
 src/lexer.obj: src/lexer.cpp.obj
 .PHONY : src/lexer.obj
@@ -199,29 +284,53 @@ src/parser.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\calc_lib.dir\build.make CMakeFiles/calc_lib.dir/src/parser.cpp.s
 .PHONY : src/parser.cpp.s
 
-src/visitor.obj: src/visitor.cpp.obj
-.PHONY : src/visitor.obj
+tests/test_derivative.obj: tests/test_derivative.cpp.obj
+.PHONY : tests/test_derivative.obj
 
 # target to build an object file
-src/visitor.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\calc_lib.dir\build.make CMakeFiles/calc_lib.dir/src/visitor.cpp.obj
-.PHONY : src/visitor.cpp.obj
+tests/test_derivative.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\unit_tests.dir\build.make CMakeFiles/unit_tests.dir/tests/test_derivative.cpp.obj
+.PHONY : tests/test_derivative.cpp.obj
 
-src/visitor.i: src/visitor.cpp.i
-.PHONY : src/visitor.i
+tests/test_derivative.i: tests/test_derivative.cpp.i
+.PHONY : tests/test_derivative.i
 
 # target to preprocess a source file
-src/visitor.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\calc_lib.dir\build.make CMakeFiles/calc_lib.dir/src/visitor.cpp.i
-.PHONY : src/visitor.cpp.i
+tests/test_derivative.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\unit_tests.dir\build.make CMakeFiles/unit_tests.dir/tests/test_derivative.cpp.i
+.PHONY : tests/test_derivative.cpp.i
 
-src/visitor.s: src/visitor.cpp.s
-.PHONY : src/visitor.s
+tests/test_derivative.s: tests/test_derivative.cpp.s
+.PHONY : tests/test_derivative.s
 
 # target to generate assembly for a file
-src/visitor.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\calc_lib.dir\build.make CMakeFiles/calc_lib.dir/src/visitor.cpp.s
-.PHONY : src/visitor.cpp.s
+tests/test_derivative.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\unit_tests.dir\build.make CMakeFiles/unit_tests.dir/tests/test_derivative.cpp.s
+.PHONY : tests/test_derivative.cpp.s
+
+tests/test_evaluate_derivative.obj: tests/test_evaluate_derivative.cpp.obj
+.PHONY : tests/test_evaluate_derivative.obj
+
+# target to build an object file
+tests/test_evaluate_derivative.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\unit_tests.dir\build.make CMakeFiles/unit_tests.dir/tests/test_evaluate_derivative.cpp.obj
+.PHONY : tests/test_evaluate_derivative.cpp.obj
+
+tests/test_evaluate_derivative.i: tests/test_evaluate_derivative.cpp.i
+.PHONY : tests/test_evaluate_derivative.i
+
+# target to preprocess a source file
+tests/test_evaluate_derivative.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\unit_tests.dir\build.make CMakeFiles/unit_tests.dir/tests/test_evaluate_derivative.cpp.i
+.PHONY : tests/test_evaluate_derivative.cpp.i
+
+tests/test_evaluate_derivative.s: tests/test_evaluate_derivative.cpp.s
+.PHONY : tests/test_evaluate_derivative.s
+
+# target to generate assembly for a file
+tests/test_evaluate_derivative.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\unit_tests.dir\build.make CMakeFiles/unit_tests.dir/tests/test_evaluate_derivative.cpp.s
+.PHONY : tests/test_evaluate_derivative.cpp.s
 
 tests/test_evaluator.obj: tests/test_evaluator.cpp.obj
 .PHONY : tests/test_evaluator.obj
@@ -281,16 +390,29 @@ help:
 	@echo ... rebuild_cache
 	@echo ... test
 	@echo ... calc_lib
+	@echo ... calculator_lab
 	@echo ... unit_tests
+	@echo ... main.obj
+	@echo ... main.i
+	@echo ... main.s
+	@echo ... src/derivative_visitor.obj
+	@echo ... src/derivative_visitor.i
+	@echo ... src/derivative_visitor.s
+	@echo ... src/evaluator_visitor.obj
+	@echo ... src/evaluator_visitor.i
+	@echo ... src/evaluator_visitor.s
 	@echo ... src/lexer.obj
 	@echo ... src/lexer.i
 	@echo ... src/lexer.s
 	@echo ... src/parser.obj
 	@echo ... src/parser.i
 	@echo ... src/parser.s
-	@echo ... src/visitor.obj
-	@echo ... src/visitor.i
-	@echo ... src/visitor.s
+	@echo ... tests/test_derivative.obj
+	@echo ... tests/test_derivative.i
+	@echo ... tests/test_derivative.s
+	@echo ... tests/test_evaluate_derivative.obj
+	@echo ... tests/test_evaluate_derivative.i
+	@echo ... tests/test_evaluate_derivative.s
 	@echo ... tests/test_evaluator.obj
 	@echo ... tests/test_evaluator.i
 	@echo ... tests/test_evaluator.s

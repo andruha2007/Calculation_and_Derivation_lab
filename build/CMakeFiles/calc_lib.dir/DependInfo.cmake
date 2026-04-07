@@ -8,9 +8,10 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "C:/Code_Territory/C_Code/Calculation_and_Derivation_lab/src/derivative_visitor.cpp" "CMakeFiles/calc_lib.dir/src/derivative_visitor.cpp.obj" "gcc" "CMakeFiles/calc_lib.dir/src/derivative_visitor.cpp.obj.d"
+  "C:/Code_Territory/C_Code/Calculation_and_Derivation_lab/src/evaluator_visitor.cpp" "CMakeFiles/calc_lib.dir/src/evaluator_visitor.cpp.obj" "gcc" "CMakeFiles/calc_lib.dir/src/evaluator_visitor.cpp.obj.d"
   "C:/Code_Territory/C_Code/Calculation_and_Derivation_lab/src/lexer.cpp" "CMakeFiles/calc_lib.dir/src/lexer.cpp.obj" "gcc" "CMakeFiles/calc_lib.dir/src/lexer.cpp.obj.d"
   "C:/Code_Territory/C_Code/Calculation_and_Derivation_lab/src/parser.cpp" "CMakeFiles/calc_lib.dir/src/parser.cpp.obj" "gcc" "CMakeFiles/calc_lib.dir/src/parser.cpp.obj.d"
-  "C:/Code_Territory/C_Code/Calculation_and_Derivation_lab/src/visitor.cpp" "CMakeFiles/calc_lib.dir/src/visitor.cpp.obj" "gcc" "CMakeFiles/calc_lib.dir/src/visitor.cpp.obj.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

@@ -1,15 +1,19 @@
 #pragma once
-#include "parser.hpp"
-
 #include <unordered_map>
 #include <stack>
 #include <string>
+#include <memory>
+#include <vector>
+
+struct ASTNode;
+using ASTN_ptr = std::unique_ptr<ASTNode>;
 
 class NumberNode;
 class VariableNode;
 class BinOpNode;
 class UnOpNode;
 class FunctionCallNode;
+class AST;
 
 class Visitor{
     public:
@@ -41,16 +45,12 @@ class Evaluator final: public Visitor{
         Evaluator(std::unordered_map<std::string, double>& vars);
 };
 
-/*
 class Derivative final: public Visitor{
-    std::unordered_map<std::string, double> map_for_vars;
-    std::stack<double> stack_result;
-
-    double call_func(const std::string& name, std::vector<double>& args);
+    std::string differentiation_variable;
+    std::stack<ASTN_ptr> stack_result;
 
     public:
-
-        double get_result() const;
+        AST get_result();
 
         void visit(NumberNode &) override;
         void visit(VariableNode &) override;
@@ -58,6 +58,18 @@ class Derivative final: public Visitor{
         void visit(UnOpNode &) override;
         void visit(FunctionCallNode &) override;
 
-        Derivative(std::unordered_map<std::string, double>& vars);
+        explicit Derivative(std::string variable_name = "x");
 };
-*/
+
+class Simplifier final: public Visitor{
+    std::stack<ASTN_ptr> stack_result;
+
+    public:
+        AST get_result();
+
+        void visit(NumberNode &) override;
+        void visit(VariableNode &) override;
+        void visit(BinOpNode &) override;
+        void visit(UnOpNode &) override;
+        void visit(FunctionCallNode &) override;
+};

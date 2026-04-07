@@ -1,4 +1,8 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/unit_tests.dir/tests/test_derivative.cpp.obj"
+  "CMakeFiles/unit_tests.dir/tests/test_derivative.cpp.obj.d"
+  "CMakeFiles/unit_tests.dir/tests/test_evaluate_derivative.cpp.obj"
+  "CMakeFiles/unit_tests.dir/tests/test_evaluate_derivative.cpp.obj.d"
   "CMakeFiles/unit_tests.dir/tests/test_evaluator.cpp.obj"
   "CMakeFiles/unit_tests.dir/tests/test_evaluator.cpp.obj.d"
   "CMakeFiles/unit_tests.dir/tests/test_main.cpp.obj"

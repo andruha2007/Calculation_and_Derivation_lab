@@ -1,10 +1,12 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/calc_lib.dir/src/derivative_visitor.cpp.obj"
+  "CMakeFiles/calc_lib.dir/src/derivative_visitor.cpp.obj.d"
+  "CMakeFiles/calc_lib.dir/src/evaluator_visitor.cpp.obj"
+  "CMakeFiles/calc_lib.dir/src/evaluator_visitor.cpp.obj.d"
   "CMakeFiles/calc_lib.dir/src/lexer.cpp.obj"
   "CMakeFiles/calc_lib.dir/src/lexer.cpp.obj.d"
   "CMakeFiles/calc_lib.dir/src/parser.cpp.obj"
   "CMakeFiles/calc_lib.dir/src/parser.cpp.obj.d"
-  "CMakeFiles/calc_lib.dir/src/visitor.cpp.obj"
-  "CMakeFiles/calc_lib.dir/src/visitor.cpp.obj.d"
   "libcalc_lib.a"
   "libcalc_lib.pdb"
 )

@@ -11,6 +11,8 @@ FetchContent_MakeAvailable(Catch2)
 # Укажите реальные имена ваших тестовых файлов (лежат в папке tests)
 set(TEST_SOURCES
     test_evaluator.cpp
+    test_derivative.cpp
+    test_evaluate_derivative.cpp
 )
 
 add_executable(unit_tests ${TEST_SOURCES})

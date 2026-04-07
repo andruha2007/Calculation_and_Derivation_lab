@@ -8,6 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "C:/Code_Territory/C_Code/Calculation_and_Derivation_lab/tests/test_derivative.cpp" "CMakeFiles/unit_tests.dir/tests/test_derivative.cpp.obj" "gcc" "CMakeFiles/unit_tests.dir/tests/test_derivative.cpp.obj.d"
+  "C:/Code_Territory/C_Code/Calculation_and_Derivation_lab/tests/test_evaluate_derivative.cpp" "CMakeFiles/unit_tests.dir/tests/test_evaluate_derivative.cpp.obj" "gcc" "CMakeFiles/unit_tests.dir/tests/test_evaluate_derivative.cpp.obj.d"
   "C:/Code_Territory/C_Code/Calculation_and_Derivation_lab/tests/test_evaluator.cpp" "CMakeFiles/unit_tests.dir/tests/test_evaluator.cpp.obj" "gcc" "CMakeFiles/unit_tests.dir/tests/test_evaluator.cpp.obj.d"
   "C:/Code_Territory/C_Code/Calculation_and_Derivation_lab/tests/test_main.cpp" "CMakeFiles/unit_tests.dir/tests/test_main.cpp.obj" "gcc" "CMakeFiles/unit_tests.dir/tests/test_main.cpp.obj.d"
   )

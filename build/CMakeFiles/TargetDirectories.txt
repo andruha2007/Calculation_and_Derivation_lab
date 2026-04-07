@@ -1,4 +1,5 @@
 C:/Code_Territory/C_Code/Calculation_and_Derivation_lab/build/CMakeFiles/calc_lib.dir
+C:/Code_Territory/C_Code/Calculation_and_Derivation_lab/build/CMakeFiles/calculator_lab.dir
 C:/Code_Territory/C_Code/Calculation_and_Derivation_lab/build/CMakeFiles/unit_tests.dir
 C:/Code_Territory/C_Code/Calculation_and_Derivation_lab/build/CMakeFiles/test.dir
 C:/Code_Territory/C_Code/Calculation_and_Derivation_lab/build/CMakeFiles/edit_cache.dir

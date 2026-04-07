@@ -21,6 +21,20 @@ static double evaluate(const std::string& expr,
     return evaluator.get_result();
 }
 
+static double evaluate_derivative(const std::string& expr,
+                                 const std::string& variable,
+                                 std::unordered_map<std::string, double> vars = {}) {
+    Lexer lexer(expr);
+    Parser parser(lexer);
+    AST tree = parser.parse();
+    Derivative derivative(variable);
+    tree.get_root()->accept(derivative);
+    AST derivative_tree = derivative.get_result();
+    Evaluator evaluator(vars);
+    derivative_tree.get_root()->accept(evaluator);
+    return evaluator.get_result();
+}
+
 static bool approx(double a, double b, double eps = 1e-6) {
     return std::abs(a - b) < eps;
 }
@@ -99,10 +113,15 @@ TEST_CASE("Lexer: Tokenization", "[lexer]") {
     // ===== NEGATIVE TESTS (10) =====
     
     SECTION("L21: Leading space") {
-        REQUIRE_THROWS_AS(lexer_flow_concatenator(" 2"), std::runtime_error);
+        REQUIRE(lexer_flow_concatenator(" 2") == "2\n");
     }
     SECTION("L22: Unknown character @") {
-        REQUIRE_THROWS_AS(lexer_flow_concatenator("2@3"), std::runtime_error);
+        try {
+            lexer_flow_concatenator("2@3");
+            FAIL("Expected lexer error");
+        } catch (const std::runtime_error& error) {
+            REQUIRE(std::string(error.what()).find("position 1") != std::string::npos);
+        }
     }
     SECTION("L23: Unknown character $") {
         REQUIRE_THROWS_AS(lexer_flow_concatenator("$x"), std::runtime_error);
@@ -198,6 +217,12 @@ TEST_CASE("Parser: AST construction and syntax", "[parser]") {
     SECTION("P20: Variadic function min") {
         REQUIRE(approx(evaluate("min(5,2,8,1)"), 1.0));
     }
+    SECTION("P31: Nested functions") {
+        REQUIRE(approx(evaluate("sin(cos(0))"), std::sin(std::cos(0.0))));
+    }
+    SECTION("P32: Nested function in arguments") {
+        REQUIRE(approx(evaluate("log(2,pow(2,3))"), 3.0));
+    }
     
     // ===== NEGATIVE TESTS (10) =====
     
@@ -276,7 +301,7 @@ TEST_CASE("Evaluator: Computation and errors", "[evaluator]") {
         REQUIRE(approx(evaluate("x*x+y*2", vars), 10.0));
     }
     SECTION("E12: Precision requirement") {
-        double result = evaluate("1.0/3.0 * 3.0");
+        double result = evaluate(" 1.0 / 3.0 * 3.0 ");
         REQUIRE(approx(result, 1.0, 1e-6));
     }
     
@@ -305,6 +330,12 @@ TEST_CASE("Evaluator: Computation and errors", "[evaluator]") {
     }
     SECTION("E20: lg(100)") {
         REQUIRE(approx(evaluate("lg(100)"), 2.0));
+    }
+    SECTION("E31: Nested functions") {
+        REQUIRE(approx(evaluate("sin(cos(0))"), std::sin(std::cos(0.0))));
+    }
+    SECTION("E32: Nested function arguments") {
+        REQUIRE(approx(evaluate("log(2,pow(2,3))"), 3.0));
     }
     
     // ===== NEGATIVE TESTS: Domain errors (10) =====
@@ -353,8 +384,8 @@ TEST_CASE("Integration: Full pipeline", "[integration]") {
     }
     
     SECTION("I02: Complex nested expression") {
-        std::string expr = "sin(cos(0)) + sqrt(pow(3,2) + pow(4,2)) - log(2,8)";
-        double expected = std::sin(std::cos(0)) + std::sqrt(9+16) - 3.0;
+        std::string expr = "sin(cos(0))+sqrt(pow(3,2)+pow(4,2))-log(2,8)";
+        double expected = std::sin(std::cos(0.0)) + std::sqrt(std::pow(3.0, 2.0)+std::pow(4.0, 2.0)) - 3.0;
         REQUIRE(approx(evaluate(expr), expected));
     }
     
@@ -373,8 +404,42 @@ TEST_CASE("Integration: Full pipeline", "[integration]") {
     
     SECTION("I05: Function with nested args") {
         REQUIRE(approx(
-            evaluate("log(2, pow(2, 3))"),  // log_2(2^3) = 3
+            evaluate("log(2,pow(2,3))"),
             3.0
+        ));
+    }
+}
+
+TEST_CASE("Derivative: Symbolic visitor evaluation", "[derivative]") {
+
+    SECTION("D01: Variable") {
+        REQUIRE(approx(evaluate_derivative("x", "x", {{"x", 5.0}}), 1.0));
+    }
+    SECTION("D02: Constant") {
+        REQUIRE(approx(evaluate_derivative("42", "x", {{"x", 5.0}}), 0.0));
+    }
+    SECTION("D03: Power") {
+        REQUIRE(approx(evaluate_derivative("x^3", "x", {{"x", 2.0}}), 12.0));
+    }
+    SECTION("D04: Product rule") {
+        REQUIRE(approx(evaluate_derivative("x*sin(x)", "x", {{"x", 0.0}}), 0.0));
+    }
+    SECTION("D05: Chain rule") {
+        REQUIRE(approx(evaluate_derivative("sin(x^2)", "x", {{"x", 1.0}}), 2.0 * std::cos(1.0)));
+    }
+    SECTION("D06: Different variable") {
+        REQUIRE(approx(evaluate_derivative("y^2+x", "x", {{"x", 3.0}, {"y", 4.0}}), 1.0));
+    }
+    SECTION("D07: Quotient rule") {
+        REQUIRE(approx(evaluate_derivative("x/(1+x)", "x", {{"x", 2.0}}), 1.0 / 9.0));
+    }
+    SECTION("D08: Logarithm") {
+        REQUIRE(approx(evaluate_derivative("ln(x)", "x", {{"x", std::exp(1.0)}}), 1.0 / std::exp(1.0)));
+    }
+    SECTION("D09: Nested functions") {
+        REQUIRE(approx(
+            evaluate_derivative("sin(cos(x))", "x", {{"x", 0.0}}),
+            -std::sin(0.0) * std::cos(std::cos(0.0))
         ));
     }
 }

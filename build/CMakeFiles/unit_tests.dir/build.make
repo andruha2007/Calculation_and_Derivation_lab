@@ -101,22 +101,56 @@ CMakeFiles/unit_tests.dir/tests/test_evaluator.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/unit_tests.dir/tests/test_evaluator.cpp.s"
 	C:\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Code_Territory\C_Code\Calculation_and_Derivation_lab\tests\test_evaluator.cpp -o CMakeFiles\unit_tests.dir\tests\test_evaluator.cpp.s
 
+CMakeFiles/unit_tests.dir/tests/test_evaluate_derivative.cpp.obj: CMakeFiles/unit_tests.dir/flags.make
+CMakeFiles/unit_tests.dir/tests/test_evaluate_derivative.cpp.obj: CMakeFiles/unit_tests.dir/includes_CXX.rsp
+CMakeFiles/unit_tests.dir/tests/test_evaluate_derivative.cpp.obj: C:/Code_Territory/C_Code/Calculation_and_Derivation_lab/tests/test_evaluate_derivative.cpp
+CMakeFiles/unit_tests.dir/tests/test_evaluate_derivative.cpp.obj: CMakeFiles/unit_tests.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Code_Territory\C_Code\Calculation_and_Derivation_lab\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/unit_tests.dir/tests/test_evaluate_derivative.cpp.obj"
+	C:\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/unit_tests.dir/tests/test_evaluate_derivative.cpp.obj -MF CMakeFiles\unit_tests.dir\tests\test_evaluate_derivative.cpp.obj.d -o CMakeFiles\unit_tests.dir\tests\test_evaluate_derivative.cpp.obj -c C:\Code_Territory\C_Code\Calculation_and_Derivation_lab\tests\test_evaluate_derivative.cpp
+
+CMakeFiles/unit_tests.dir/tests/test_evaluate_derivative.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/unit_tests.dir/tests/test_evaluate_derivative.cpp.i"
+	C:\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Code_Territory\C_Code\Calculation_and_Derivation_lab\tests\test_evaluate_derivative.cpp > CMakeFiles\unit_tests.dir\tests\test_evaluate_derivative.cpp.i
+
+CMakeFiles/unit_tests.dir/tests/test_evaluate_derivative.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/unit_tests.dir/tests/test_evaluate_derivative.cpp.s"
+	C:\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Code_Territory\C_Code\Calculation_and_Derivation_lab\tests\test_evaluate_derivative.cpp -o CMakeFiles\unit_tests.dir\tests\test_evaluate_derivative.cpp.s
+
+CMakeFiles/unit_tests.dir/tests/test_derivative.cpp.obj: CMakeFiles/unit_tests.dir/flags.make
+CMakeFiles/unit_tests.dir/tests/test_derivative.cpp.obj: CMakeFiles/unit_tests.dir/includes_CXX.rsp
+CMakeFiles/unit_tests.dir/tests/test_derivative.cpp.obj: C:/Code_Territory/C_Code/Calculation_and_Derivation_lab/tests/test_derivative.cpp
+CMakeFiles/unit_tests.dir/tests/test_derivative.cpp.obj: CMakeFiles/unit_tests.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Code_Territory\C_Code\Calculation_and_Derivation_lab\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/unit_tests.dir/tests/test_derivative.cpp.obj"
+	C:\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/unit_tests.dir/tests/test_derivative.cpp.obj -MF CMakeFiles\unit_tests.dir\tests\test_derivative.cpp.obj.d -o CMakeFiles\unit_tests.dir\tests\test_derivative.cpp.obj -c C:\Code_Territory\C_Code\Calculation_and_Derivation_lab\tests\test_derivative.cpp
+
+CMakeFiles/unit_tests.dir/tests/test_derivative.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/unit_tests.dir/tests/test_derivative.cpp.i"
+	C:\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Code_Territory\C_Code\Calculation_and_Derivation_lab\tests\test_derivative.cpp > CMakeFiles\unit_tests.dir\tests\test_derivative.cpp.i
+
+CMakeFiles/unit_tests.dir/tests/test_derivative.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/unit_tests.dir/tests/test_derivative.cpp.s"
+	C:\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Code_Territory\C_Code\Calculation_and_Derivation_lab\tests\test_derivative.cpp -o CMakeFiles\unit_tests.dir\tests\test_derivative.cpp.s
+
 # Object files for target unit_tests
 unit_tests_OBJECTS = \
 "CMakeFiles/unit_tests.dir/tests/test_main.cpp.obj" \
-"CMakeFiles/unit_tests.dir/tests/test_evaluator.cpp.obj"
+"CMakeFiles/unit_tests.dir/tests/test_evaluator.cpp.obj" \
+"CMakeFiles/unit_tests.dir/tests/test_evaluate_derivative.cpp.obj" \
+"CMakeFiles/unit_tests.dir/tests/test_derivative.cpp.obj"
 
 # External object files for target unit_tests
 unit_tests_EXTERNAL_OBJECTS =
 
 unit_tests.exe: CMakeFiles/unit_tests.dir/tests/test_main.cpp.obj
 unit_tests.exe: CMakeFiles/unit_tests.dir/tests/test_evaluator.cpp.obj
+unit_tests.exe: CMakeFiles/unit_tests.dir/tests/test_evaluate_derivative.cpp.obj
+unit_tests.exe: CMakeFiles/unit_tests.dir/tests/test_derivative.cpp.obj
 unit_tests.exe: CMakeFiles/unit_tests.dir/build.make
 unit_tests.exe: libcalc_lib.a
 unit_tests.exe: CMakeFiles/unit_tests.dir/linkLibs.rsp
 unit_tests.exe: CMakeFiles/unit_tests.dir/objects1.rsp
 unit_tests.exe: CMakeFiles/unit_tests.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\Code_Territory\C_Code\Calculation_and_Derivation_lab\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable unit_tests.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\Code_Territory\C_Code\Calculation_and_Derivation_lab\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable unit_tests.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\unit_tests.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

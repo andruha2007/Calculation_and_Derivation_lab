@@ -1,9 +1,10 @@
 #include "../include/visitor.hpp"
+#include "../include/parser.hpp"
 #include <cmath>
 
 Evaluator::Evaluator(std::unordered_map<std::string, double>& vars): map_for_vars(vars){};
 
-double Evaluator::get_result() const{ 
+double Evaluator::get_result() const{
     if (stack_result.size() != 1){
         throw std::runtime_error("ERROR [Evaluator]: Stack contains " + std::to_string(stack_result.size()) + " items, expected 1");
     }
@@ -39,7 +40,7 @@ double Evaluator::call_func(const std::string& name, std::vector<double>& args) 
         return std::log10(args[0]);
     }
     if (name == "log" && args.size() == 2) {
-        if (args[0] <= 0 || std::abs(args[0] - 1.0) < 1e-12 || args[1] <= 0) 
+        if (args[0] <= 0 || std::abs(args[0] - 1.0) < 1e-12 || args[1] <= 0)
             throw std::runtime_error("ERROR [Evaluator]: Domain error: log");
         return std::log(args[1]) / std::log(args[0]);
     }
@@ -78,9 +79,9 @@ void Evaluator::visit(VariableNode &node){
     stack_result.push(var->second);
 }
 void Evaluator::visit(BinOpNode &node) {
-    if (stack_result.size() < 2) 
+    if (stack_result.size() < 2)
         throw std::runtime_error("ERROR [Evaluator]: Not enough operands for binary operation");
-        
+
     double right = stack_result.top(); stack_result.pop();
     double left  = stack_result.top(); stack_result.pop();
     double res = 0.0;
@@ -89,14 +90,14 @@ void Evaluator::visit(BinOpNode &node) {
         case OpSign::PLUS: res = left + right; break;
         case OpSign::MINUS: res = left - right; break;
         case OpSign::MULTIPLY: res = left * right; break;
-        case OpSign::SUBDIVISION:  
+        case OpSign::SUBDIVISION:
             if (std::abs(right) < 1e-12) throw std::runtime_error("ERROR [Evaluator]: Division by zero");
             res = left / right; break;
-        case OpSign::DEGREE:        
+        case OpSign::DEGREE:
             if (left == 0 && right < 0) throw std::runtime_error("ERROR [Evaluator]: Domain error: pow");
             res = std::pow(left, right); break;
-        default: 
-            throw std::runtime_error("ERROR [Evaluator]: Unknown binary operator"); // Все стопается в парсере, но лишним не бывает
+        default:
+            throw std::runtime_error("ERROR [Evaluator]: Unknown binary operator"); // Р’СЃРµ СЃС‚РѕРїР°РµС‚СЃСЏ РІ РїР°СЂСЃРµСЂРµ, РЅРѕ Р»РёС€РЅРёРј РЅРµ Р±С‹РІР°РµС‚
     }
     stack_result.push(res);
 }
@@ -107,16 +108,16 @@ void Evaluator::visit(UnOpNode &node){
 
     double operand = stack_result.top();
     stack_result.pop();
-    
+
     double result = (node.op == OpSign::UPLUS) ? operand : -operand;
     stack_result.push(result);
 }
 
 void Evaluator::visit(FunctionCallNode &node){
     size_t n = node.arguments.size();
-    if (stack_result.size() < n) 
+    if (stack_result.size() < n)
         throw std::runtime_error("ERROR [Evaluator] Not enough arguments for function " + node.name);
-        
+
     std::vector<double> args(n);
     for (int i = static_cast<int>(n) - 1; i >= 0; --i) {
         args[i] = stack_result.top();
@@ -124,4 +125,3 @@ void Evaluator::visit(FunctionCallNode &node){
     }
     stack_result.push(call_func(node.name, args));
 }
-

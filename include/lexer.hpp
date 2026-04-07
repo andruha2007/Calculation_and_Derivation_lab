@@ -69,6 +69,8 @@ class Lexer{
     Token scan_indentificator(); // не публичный !!!
     Token scan_number(); // не публичный !!!
     Token scan_operator();
+    void skip_spaces();
+    std::string error_position() const;
     //Token scan(); // не публичный !!!
 
     public:

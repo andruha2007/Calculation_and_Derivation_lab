@@ -1,4 +1,5 @@
 #include "../include/lexer.hpp"
+#include <cctype>
 
 
 void Token::set_value(std::string& val) {value = val;};
@@ -17,6 +18,16 @@ Lexer::Lexer(const std::string& expression_): expression(expression_){};
 
 void Lexer::advance(){++position;}
 
+void Lexer::skip_spaces(){
+    while (std::isspace(static_cast<unsigned char>(peek_char()))){
+        advance();
+    }
+}
+
+std::string Lexer::error_position() const{
+    return " at position " + std::to_string(position) + " token position " + std::to_string(tok_pos);
+}
+
 char Lexer::peek_char() const{
     if (position >= expression.length()) return '\0';
     return expression[position];};
@@ -26,9 +37,9 @@ lexem_t Lexer::peek_type() const{
 
     if (c == '\0'){
         return lexem_t::EOEX;
-    } if (std::isdigit(c) || c == '.'){
+    } if (std::isdigit(static_cast<unsigned char>(c)) || c == '.'){
         return lexem_t::NUMBER;
-    } if (std::isalpha(c) || c == '_'){
+    } if (std::isalpha(static_cast<unsigned char>(c)) || c == '_'){
         return lexem_t::IDENTIFICATOR;
     } if (c == '+' || c == '-' || c == '^' || c == '*' || c == '/' || c == ','){ // c == '%' || c == '!'
         return lexem_t::OPERATOR;
@@ -69,19 +80,15 @@ Token Lexer::next(){
     }
 
     Token tok;
-    
-    if(peek_char() == ' ' && position == 0){
-        throw std::runtime_error("ERROR [Lexer] Spaces are not available at the beginning");
-    } if (peek_type() == lexem_t::EOEX){
+    skip_spaces();
+
+    if (peek_type() == lexem_t::EOEX){
         tok.set_type(lexem_t::EOEX);
         return tok;
     }
 
-    while (peek_char() == ' '){
-        advance();
-    }
-
     lexem_t lex = peek_type();
+    if (peek_type() == lexem_t::EOEX){ tok.set_type(lexem_t::EOEX); return tok; }
     char c = peek_char();
 
     switch (lex)
@@ -105,7 +112,7 @@ Token Lexer::next(){
     case lexem_t::R_FIGURE_PAPAREN:
         tok.set_type(lexem_t::R_FIGURE_PAPAREN); break;
     default:
-        throw std::runtime_error("ERROR [Lexer] Unknown symbol \"" + std::string(1, peek_char()) + "\" at position " + std::to_string(position) + " token position " + std::to_string(tok_pos));
+        throw std::runtime_error("ERROR [Lexer] Unknown symbol \"" + std::string(1, peek_char()) + "\"" + error_position());
         break;
     }
 
@@ -115,8 +122,8 @@ Token Lexer::next(){
     tok.set_value(buffer);
     buffer = "";
     advance();
-    
-    return tok;    
+
+    return tok;
 }
 
 Token Lexer::scan_indentificator(){
@@ -124,31 +131,32 @@ Token Lexer::scan_indentificator(){
     tok.set_type(lexem_t::IDENTIFICATOR);
     tok.set_tok_pos(tok_pos);
 
-    while (peek_type() != lexem_t::EOEX && peek_type() != lexem_t::OPERATOR && !is_paren() && peek_char() != ' '){        
+    while (peek_type() != lexem_t::EOEX && peek_type() != lexem_t::OPERATOR && !is_paren() && !std::isspace(static_cast<unsigned char>(peek_char()))){
         char c = peek_char();
-        if (std::isalpha(c)) c = tolower(c);
+        if (std::isalpha(static_cast<unsigned char>(c))) c = static_cast<char>(tolower(static_cast<unsigned char>(c)));
         switch (state){
         case lexer_state_t::START:
-            if (std::isalpha(c) || c == '_'){
+            if (std::isalpha(static_cast<unsigned char>(c)) || c == '_'){
+                buffer += c;
                 advance();
                 state = lexer_state_t::ID_CHAR;
             } else{
-                throw std::runtime_error("ERROR [Lexer] Unexpected symbol \"" + std::string(1, peek_char()) + "\" at position " + std::to_string(position) + " token position " + std::to_string(tok_pos));
+                throw std::runtime_error("ERROR [Lexer] Unexpected symbol \"" + std::string(1, peek_char()) + "\"" + error_position());
             }
             break;
         case lexer_state_t::ID_CHAR:
-            if(std::isdigit(c) || std::isalpha(c) || c =='_'){
+            if(std::isdigit(static_cast<unsigned char>(c)) || std::isalpha(static_cast<unsigned char>(c)) || c =='_'){
+                buffer += c;
                 advance();
                 state = lexer_state_t::ID_CHAR;
             } else{
-                throw std::runtime_error("ERROR [Lexer] Unexpected symbol \"" + std::string(1, peek_char()) + "\" at position " + std::to_string(position) + " token position " + std::to_string(tok_pos));
+                throw std::runtime_error("ERROR [Lexer] Unexpected symbol \"" + std::string(1, peek_char()) + "\"" + error_position());
             }
             break;
         default:
             break;
         }
 
-        buffer += c;
     }
 
     ++tok_pos;
@@ -168,18 +176,6 @@ Token Lexer::scan_operator(){
     char c = peek_char();
     buffer += c;
     advance();
-    
-    // if (c == '^' || c == '*' || c == '/' || c == '%' || c == '!'){
-    //     buffer += c;
-    //     advance();
-    // } else if (c =='+' || c == '-'){
-    //     buffer += c;
-    //     advance();
-    //     if (c == peek_char()){
-    //         buffer += c;
-    //         advance();
-    //     }
-    // }
 
     ++tok_pos;
     tok.set_value(buffer);
@@ -195,18 +191,18 @@ Token Lexer::scan_number(){
 
     bool ignore_op = false;
 
-    while (peek_type() != lexem_t::EOEX && (peek_type() != lexem_t::OPERATOR || ignore_op) && !is_paren() && peek_char() != ' '){
+    while (peek_type() != lexem_t::EOEX && (peek_type() != lexem_t::OPERATOR || ignore_op) && !is_paren() && !std::isspace(static_cast<unsigned char>(peek_char()))){
         char c = peek_char();
         switch (state){
             case lexer_state_t::START:
-                if (std::isdigit(c) && c >= '1' && c <= '9'){
+                if (std::isdigit(static_cast<unsigned char>(c)) && c >= '1' && c <= '9'){
                     advance();
                     state = lexer_state_t::NUM_INT;
                 } else if(static_cast<int>(c) == 48){
                     advance();
                     state = lexer_state_t::NUM_WAIT_FOR_POINT;
                 } else{
-                    throw std::runtime_error("ERROR [Lexer] Unexpected symbol \"" + std::string(1, peek_char()) + "\" at position " + std::to_string(position) + " token position " + std::to_string(tok_pos));
+                    throw std::runtime_error("ERROR [Lexer] Unexpected symbol \"" + std::string(1, peek_char()) + "\"" + error_position());
                 }
                 break;
             case lexer_state_t::NUM_WAIT_FOR_POINT:
@@ -214,11 +210,11 @@ Token Lexer::scan_number(){
                     advance();
                     state = lexer_state_t::NUM_FRAC;
                 } else{
-                    throw std::runtime_error("ERROR [Lexer] Unexpected symbol \"" + std::string(1, peek_char()) + "\" at position " + std::to_string(position) + " token position " + std::to_string(tok_pos));
+                    throw std::runtime_error("ERROR [Lexer] Unexpected symbol \"" + std::string(1, peek_char()) + "\"" + error_position());
                 }
                 break;
             case lexer_state_t::NUM_INT:
-                if (std::isdigit(c) && c >= '0' && c <= '9'){
+                if (std::isdigit(static_cast<unsigned char>(c)) && c >= '0' && c <= '9'){
                     advance();
                     state = lexer_state_t::NUM_INT;
                 } else if(c == '.'){
@@ -229,48 +225,48 @@ Token Lexer::scan_number(){
                     ignore_op = true;
                     state = lexer_state_t::NUM_EXP;
                 } else{
-                    throw std::runtime_error("ERROR [Lexer] Unexpected symbol \"" + std::string(1, peek_char()) + "\" at position " + std::to_string(position) + " token position " + std::to_string(tok_pos));
+                    throw std::runtime_error("ERROR [Lexer] Unexpected symbol \"" + std::string(1, peek_char()) + "\"" + error_position());
                 }
                 break;
             case lexer_state_t::NUM_EXP:
-                if (std::isdigit(c) && c >= '1' && c <= '9'){
+                if (std::isdigit(static_cast<unsigned char>(c)) && c >= '0' && c <= '9'){
                     advance();
                     state = lexer_state_t::NUM_AFTER_EXP;
-                }if (c == '+' || c == '-'){
+                } else if (c == '+' || c == '-'){
                     advance();
                     state = lexer_state_t::NUM_SIGN_EXP;
                 } else{
-                    throw std::runtime_error("ERROR [Lexer] Unexpected symbol \"" + std::string(1, peek_char()) + "\" at position " + std::to_string(position) + " token position " + std::to_string(tok_pos));
+                    throw std::runtime_error("ERROR [Lexer] Unexpected symbol \"" + std::string(1, peek_char()) + "\"" + error_position());
                 }
                 break;
             case lexer_state_t::NUM_SIGN_EXP:
-                if (std::isdigit(c) && c >= '1' && c <= '9'){
+                if (std::isdigit(static_cast<unsigned char>(c)) && c >= '1' && c <= '9'){
                     advance();
                     state = lexer_state_t::NUM_AFTER_EXP;
                     ignore_op = false;
                 } else{
-                    throw std::runtime_error("ERROR [Lexer] Unexpected symbol \"" + std::string(1, peek_char()) + "\" at position " + std::to_string(position) + " token position " + std::to_string(tok_pos));
+                    throw std::runtime_error("ERROR [Lexer] Unexpected symbol \"" + std::string(1, peek_char()) + "\"" + error_position());
                 }
                 break;
             case lexer_state_t::NUM_AFTER_EXP:
-                if (std::isdigit(c) && c >= '0' && c <= '9'){
+                if (std::isdigit(static_cast<unsigned char>(c)) && c >= '0' && c <= '9'){
                     advance();
                     state = lexer_state_t::NUM_AFTER_FRAC;
                 } else{
-                    throw std::runtime_error("ERROR [Lexer] Unexpected symbol \"" + std::string(1, peek_char()) + "\" at position " + std::to_string(position) + " token position " + std::to_string(tok_pos));
+                    throw std::runtime_error("ERROR [Lexer] Unexpected symbol \"" + std::string(1, peek_char()) + "\"" + error_position());
                 }
                 break;
-            
+
             case lexer_state_t::NUM_FRAC:
-                if (std::isdigit(c) && c >= '0' && c <= '9'){
+                if (std::isdigit(static_cast<unsigned char>(c)) && c >= '0' && c <= '9'){
                     advance();
                     state = lexer_state_t::NUM_AFTER_FRAC;
                 } else{
-                    throw std::runtime_error("ERROR [Lexer] Unexpected symbol \"" + std::string(1, peek_char()) + "\" at position " + std::to_string(position) + " token position " + std::to_string(tok_pos));
+                    throw std::runtime_error("ERROR [Lexer] Unexpected symbol \"" + std::string(1, peek_char()) + "\"" + error_position());
                 }
                 break;
             case lexer_state_t::NUM_AFTER_FRAC:
-                if (std::isdigit(c) && c >= '0' && c <= '9'){
+                if (std::isdigit(static_cast<unsigned char>(c)) && c >= '0' && c <= '9'){
                     advance();
                     state = lexer_state_t::NUM_AFTER_FRAC;
                 } else if (c == 'e'){
@@ -278,12 +274,12 @@ Token Lexer::scan_number(){
                     advance();
                     state = lexer_state_t::NUM_EXP;
                 } else{
-                   throw std::runtime_error("ERROR [Lexer] Unexpected symbol \"" + std::string(1, peek_char()) + "\" at position " + std::to_string(position) + " token position " + std::to_string(tok_pos));
+                   throw std::runtime_error("ERROR [Lexer] Unexpected symbol \"" + std::string(1, peek_char()) + "\"" + error_position());
                 }
                 break;
-            
+
             default:
-                throw std::runtime_error("ERROR [Lexer] Unexppected lexer status");
+                throw std::runtime_error("ERROR [Lexer] Unexppected lexer status" + error_position());
                 break;
         }
 
@@ -291,7 +287,7 @@ Token Lexer::scan_number(){
     }
 
     if (state == lexer_state_t::NUM_FRAC || state == lexer_state_t::NUM_EXP || state == lexer_state_t::NUM_SIGN_EXP){
-        throw std::runtime_error("ERROR [Lexer] Unexpected number "+ buffer + "at position " + std::to_string(position) + " token position " + std::to_string(tok_pos));
+        throw std::runtime_error("ERROR [Lexer] Unexpected number " + buffer + error_position());
     }
 
     ++tok_pos;

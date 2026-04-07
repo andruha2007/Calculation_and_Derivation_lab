@@ -132,6 +132,7 @@ class Parser{
     std::vector<OperatorType> stack_op;
     std::vector<ASTN_ptr> tree_stack;
     std::vector<ASTN_ptr> stack_of_args;
+    std::vector<size_t> stack_of_args_sizes;
     Token current;
     bool first_call = true;
     bool is_in_function = false;
