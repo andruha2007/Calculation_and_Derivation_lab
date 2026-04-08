@@ -1,4 +1,3 @@
-// tests.cpp - Comprehensive test suite (90 tests)
 #include <catch.hpp>
 #include "../include/lexer.hpp"
 #include "../include/parser.hpp"
@@ -6,10 +5,6 @@
 #include <unordered_map>
 #include <cmath>
 #include <limits>
-
-// ============================================================================
-// HELPER FUNCTIONS
-// ============================================================================
 
 static double evaluate(const std::string& expr, 
                       std::unordered_map<std::string, double> vars = {}) {
@@ -39,14 +34,8 @@ static bool approx(double a, double b, double eps = 1e-6) {
     return std::abs(a - b) < eps;
 }
 
-// ============================================================================
-// LEXER TESTS (30 tests)
-// ============================================================================
-
 TEST_CASE("Lexer: Tokenization", "[lexer]") {
-    
-    // ===== POSITIVE TESTS (20) =====
-    
+        
     SECTION("L01: Integer number") {
         REQUIRE(lexer_flow_concatenator("42") == "42\n");
     }
@@ -110,7 +99,6 @@ TEST_CASE("Lexer: Tokenization", "[lexer]") {
         REQUIRE(lexer_flow_concatenator("+-*/^") == "+\n-\n*\n/\n^\n");
     }
     
-    // ===== NEGATIVE TESTS (10) =====
     
     SECTION("L21: Leading space") {
         REQUIRE(lexer_flow_concatenator(" 2") == "2\n");
@@ -149,13 +137,8 @@ TEST_CASE("Lexer: Tokenization", "[lexer]") {
     }
 }
 
-// ============================================================================
-// PARSER TESTS (30 tests)
-// ============================================================================
-
 TEST_CASE("Parser: AST construction and syntax", "[parser]") {
     
-    // ===== POSITIVE TESTS (20) =====
     
     SECTION("P01: Single number") {
         REQUIRE(approx(evaluate("42"), 42.0));
@@ -224,7 +207,6 @@ TEST_CASE("Parser: AST construction and syntax", "[parser]") {
         REQUIRE(approx(evaluate("log(2,pow(2,3))"), 3.0));
     }
     
-    // ===== NEGATIVE TESTS (10) =====
     
     SECTION("P21: Empty expression") {
         REQUIRE_THROWS_AS(evaluate(""), std::runtime_error);
@@ -258,13 +240,8 @@ TEST_CASE("Parser: AST construction and syntax", "[parser]") {
     }
 }
 
-// ============================================================================
-// EVALUATOR TESTS (30 tests)
-// ============================================================================
-
 TEST_CASE("Evaluator: Computation and errors", "[evaluator]") {
     
-    // ===== POSITIVE TESTS: Arithmetic (12) =====
     
     SECTION("E01: Addition") {
         REQUIRE(approx(evaluate("2+3"), 5.0));
@@ -305,7 +282,6 @@ TEST_CASE("Evaluator: Computation and errors", "[evaluator]") {
         REQUIRE(approx(result, 1.0, 1e-6));
     }
     
-    // ===== POSITIVE TESTS: Functions (8) =====
     
     SECTION("E13: sin(0)") {
         REQUIRE(approx(evaluate("sin(0)"), 0.0));
@@ -338,7 +314,6 @@ TEST_CASE("Evaluator: Computation and errors", "[evaluator]") {
         REQUIRE(approx(evaluate("log(2,pow(2,3))"), 3.0));
     }
     
-    // ===== NEGATIVE TESTS: Domain errors (10) =====
     
     SECTION("E21: Division by zero") {
         REQUIRE_THROWS_AS(evaluate("5/0"), std::runtime_error);
@@ -372,9 +347,6 @@ TEST_CASE("Evaluator: Computation and errors", "[evaluator]") {
     }
 }
 
-// ============================================================================
-// INTEGRATION TESTS (Bonus: 5 tests)
-// ============================================================================
 
 TEST_CASE("Integration: Full pipeline", "[integration]") {
     

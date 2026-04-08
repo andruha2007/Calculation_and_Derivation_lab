@@ -61,7 +61,7 @@ OperatorType::OperatorType(Token op, bool is_unary, bool is_func): is_function(i
                 else if (op.get_value() == "^"){symbol = OpSign::DEGREE; priority = 4; is_left_assotiativity = false;}
                 else if (op.get_value() == "("){symbol = OpSign::L_PAREN; priority = 0;}
 
-                else throw std::runtime_error("ERROR [Parser] Unknown operator \"" + op.get_value() + "\""); // parser is protected by lexer, but extra check does not hurt
+                else throw std::runtime_error("ERROR [Parser]: Unknown operator \"" + op.get_value() + "\""); // ПО СУТИ ВСЕ ЭТО ЛОВИТ ЛЕКСЕР
             }
 
 };
@@ -80,33 +80,33 @@ AST Parser::parse(){
     Token memory = {0, "", lexem_t::EOEX};
     while(current.get_type() != lexem_t::EOEX){
 
-        ////////////////////________ERRORS________////////////////////
+        ////////////////////________ОШИБКА________////////////////////
 
         if (first_call && (current.get_type() == lexem_t::OPERATOR && current.get_value() != "+"
             && current.get_value() != "-")){
-            throw std::runtime_error("ERROR [Parser] String can not start from " + current.get_value());
-        } // String can start only from unary plus or unary minus
+            throw std::runtime_error("ERROR [Parser]: String can not start from " + current.get_value());
+        }
         if (current.get_type() == next.get_type() && next.get_value() != "-"
             && next.get_value() != "+" && current.get_type() != lexem_t::L_CIRCLE_PAPAREN
             && current.get_type() != lexem_t::R_CIRCLE_PAPAREN){
-            throw std::runtime_error("ERROR [Parser] " + current.get_value());
-        } // 2 operators (except + -), numbers, identifiers подряд, but not parenthesis
+            throw std::runtime_error("ERROR [Parser]: " + current.get_value());
+        } // 2 ОПЕРАТОРА ПОДРЯД
         if (!is_in_function && current.get_value() == ","){
-            throw std::runtime_error("ERROR [Parser] Unexpected ,");
+            throw std::runtime_error("ERROR [Parser]: Unexpected ,");
         }
 
-        ////////////////////________IMPLEMENTATION_OF_STACK_WRITING________////////////////////
+        ////////////////////________ЗАПИСЬ_В_СТЕК________////////////////////
 
         if (current.get_type() == lexem_t::NUMBER){
             tree_stack.push_back(std::make_unique<NumberNode>(std::stod(current.get_value())));
-        } // Number
+        } // ЧИСЕЛКО
 
         else if (current.get_type() == lexem_t::IDENTIFICATOR && next.get_type() != lexem_t::L_CIRCLE_PAPAREN){
             if (unforgivable_names_of_vars.find(current.get_value()) != unforgivable_names_of_vars.end()) {
                 throw std::runtime_error("ERROR [Parser]: Identifier '" + current.get_value() + "' is a reserved function name and cannot be used as a variable.");
             }
             tree_stack.push_back(std::make_unique<VariableNode>(current.get_value()));
-        } // Variable
+        } // ПЕРЕМЕННАЯ
 
         else if(current.get_type() == lexem_t::IDENTIFICATOR && next.get_type() == lexem_t::L_CIRCLE_PAPAREN){
             OperatorType  op(current, false, true);
@@ -116,14 +116,14 @@ AST Parser::parse(){
 
             is_in_function = true;
 
-        } // Function
+        } // ФУНКЦИЯ
 
         else if (current.get_type() == lexem_t::OPERATOR && current.get_value() != ","){
             bool unary = first_call || (!first_call && memory.get_type() == lexem_t::OPERATOR) || memory.get_value() == "," || memory.get_value() == "(";
             OperatorType  op(current, unary, false);
 
             if (unary){
-                stack_op.push_back(op); // It is funny, but comparing unary operators here does not make sense
+                stack_op.push_back(op);
             } else if (stack_op.empty()){
                 stack_op.push_back(op);
             } else if (op.get_priority() > stack_op.back().get_priority() || stack_op.back().is_func()
@@ -157,7 +157,7 @@ AST Parser::parse(){
                 }
                 stack_op.push_back(op);
             }
-        } // Operator
+        } // ОПЕРАТОР
 
         else if (current.get_value() == "," && is_in_function){
                 if (next.get_value() == ")"){
@@ -194,13 +194,13 @@ AST Parser::parse(){
                 }
                 stack_of_args.push_back(std::move(tree_stack.back()));
                 tree_stack.pop_back();
-        } // Comma
+        } // ЗАПЯТАЯ
 
         else if(current.get_type() == lexem_t::L_CIRCLE_PAPAREN){
-            if (next.get_type() == lexem_t::R_CIRCLE_PAPAREN && !stack_op.empty() && stack_op.back().is_func()) // if someone wants f() - function without arguments
-                throw(std::runtime_error("ERROR [Parser] Unexpected parametrs in function " + stack_op.back().get_function())); // remember, there is nothing to take from tree stack here
+            if (next.get_type() == lexem_t::R_CIRCLE_PAPAREN && !stack_op.empty() && stack_op.back().is_func()) 
+                throw(std::runtime_error("ERROR [Parser] Unexpected parametrs in function " + stack_op.back().get_function())); 
             stack_op.push_back(OperatorType(current,0,0));
-        } // Left parenthesis
+        } // ЛЕВАЯ СКОБКА
 
         else if (current.get_type() == lexem_t::R_CIRCLE_PAPAREN){
             if (first_call)
@@ -236,7 +236,6 @@ AST Parser::parse(){
                 stack_op.pop_back();
             }
             if (is_in_function){
-                // Check if the current operator is a function
                 if (!stack_op.empty() && stack_op.back().is_func()){
                     if (stack_of_args_sizes.empty()){
                         throw std::runtime_error("ERROR [Parser] invalid function state");
@@ -272,9 +271,8 @@ AST Parser::parse(){
                     stack_of_args_sizes.pop_back();
                     is_in_function = !stack_of_args_sizes.empty();
                 }
-                // If it is not a function, just close parenthesis and continue
             }
-        } // Right parenthesis
+        } // ПРАВАЯ СКОБКА
 
         memory = current;
         current = next;

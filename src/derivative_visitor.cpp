@@ -5,7 +5,7 @@
 #include <cmath>
 
 namespace {
-constexpr double simplifier_epsilon = 1e-12; // small tolerance for stable algebraic simplification
+constexpr double simplifier_epsilon = 1e-12; 
 
 ASTN_ptr make_number(double value) {
     return std::make_unique<NumberNode>(value);
@@ -381,7 +381,7 @@ AST Derivative::get_result() {
     stack_result.pop();
 
     AST derivative_tree(std::move(result));
-    Simplifier simplifier; // derivative result is simplified before it leaves the visitor
+    Simplifier simplifier;
     derivative_tree.get_root()->accept(simplifier);
     return simplifier.get_result();
 }

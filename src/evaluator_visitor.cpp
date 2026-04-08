@@ -97,7 +97,7 @@ void Evaluator::visit(BinOpNode &node) {
             if (left == 0 && right < 0) throw std::runtime_error("ERROR [Evaluator]: Domain error: pow");
             res = std::pow(left, right); break;
         default:
-            throw std::runtime_error("ERROR [Evaluator]: Unknown binary operator"); // Р’СЃРµ СЃС‚РѕРїР°РµС‚СЃСЏ РІ РїР°СЂСЃРµСЂРµ, РЅРѕ Р»РёС€РЅРёРј РЅРµ Р±С‹РІР°РµС‚
+            throw std::runtime_error("ERROR [Evaluator]: Unknown binary operator"); 
     }
     stack_result.push(res);
 }
